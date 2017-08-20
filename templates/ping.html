@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+
+<!-- page title -->
+{% block TITLE_BLOCK %}
+    2NMS - network tools - PING
+{% endblock %}
+
+
+<!-- top section -->
+{% block BLOCK_TOPSECTION %}
+	<div class="uk-section-secondary uk-preserve-color">
+		<!-- navigation bar -->
+		{% set active_page = "ping" %}
+		{% include 'navbar.html' %}
+
+		<!-- command bar -->
+		{% set command = "ping" %}
+		{% set command_title = "Ping (IPv4)" %}			
+		{% include 'command.html' %}
+	</div>
+{% endblock %}
+
+
+<!-- ping command javascript -->
+{% block BLOCK_COMMAND_JAVASCRIPT %}
+	<script>
+
+		function ping() {
+	        var ip = $("#ipaddress").val();
+
+	        if (!validate_ipv4(ip)) {
+	        	var modal = UIkit.modal("#modal-ipaddress-notification");
+			  	$("#ipaddress").removeClass('uk-form-success').addClass('uk-form-danger');
+			  	modal.show();
+	        	//alert("Enter a valid IPv4 address");
+	        	return (false)
+	        }
+
+	        $("#output").empty();
+		  	$("#ipaddress").removeClass('uk-form-danger').addClass('uk-form-success');
+	        $("#output-title").text("Ping result for: "+ip);
+	        $("#command-result-section").show();
+
+			var url = "{{ url_for('public.index') }}"+"ping/"+ip;
+			var source = new EventSource(url);
+
+			source.onmessage = function(event){
+				eofstream = /.*END STREAM.*/;
+				if ((event.data).match(eofstream)) {
+					console.log(event.data);
+					source.close();
+				}
+				else {
+					reFail = / [^0]% loss/;
+					var ping_class = "ping-success";
+					if ((event.data).match(reFail)) {
+						var ping_class = "ping-fail";
+					};
+					$("#output").append('<span class="'+ping_class+'">'+event.data+"</span><br/>");
+				}
+			};
+
+
+		}
+
+	</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+<!-- result section -->
+<div id="command-result-section" class="uk-section" style="display: none;">
+
+		<div class="uk-container uk-align-center uk-text-center">
+
+		    {% for message in get_flashed_messages() %}
+		    	<p style="color: red;">{{ message }}</p>
+		    {% endfor %}
+
+			<h2 id="output-title" class="uk-margin uk-margin-remove-top uk-margin-large-bottom uk-text-center"></h2>
+
+		    <div id="output"></div>
+
+		</div>
+</div>

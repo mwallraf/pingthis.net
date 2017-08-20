@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+
+<!-- page title -->
+{% block TITLE_BLOCK %}
+    2NMS - network tools - TRACEROUTE
+{% endblock %}
+
+
+<!-- top section -->
+{% block BLOCK_TOPSECTION %}
+	<div class="uk-section-secondary uk-preserve-color">
+		<!-- navigation bar -->
+		{% set active_page = "traceroute" %}
+		{% include 'navbar.html' %}
+
+		<!-- command bar -->
+		{% set command = "traceroute" %}
+		{% set command_title = "Traceroute (IPv4)" %}			
+		{% include 'command.html' %}
+	</div>
+{% endblock %}
+
+
+<!-- traceroute command javascript -->
+{% block BLOCK_COMMAND_JAVASCRIPT %}
+	<script>
+
+		function traceroute() {
+	        var ip = $("#ipaddress").val();
+
+	        if (!validate_ipv4(ip)) {
+	        	var modal = UIkit.modal("#modal-ipaddress-notification");
+			  	$("#ipaddress").removeClass('uk-form-success').addClass('uk-form-danger');
+			  	modal.show();
+	        	//alert("Enter a valid IPv4 address");
+	        	return (false)
+	        }
+
+	        $("#output").empty();
+		  	$("#ipaddress").removeClass('uk-form-danger').addClass('uk-form-success');
+	        $("#output-title").text("Traceroute result for: "+ip);
+	        $("#command-result-section").show();
+
+			var url = "{{ url_for('public.index') }}"+"traceroute/"+ip;
+			var source = new EventSource(url);
+
+			source.onmessage = function(event){
+				eofstream = /.*END STREAM.*/;
+				if ((event.data).match(eofstream)) {
+					console.log(event.data);
+					source.close();
+				}
+				else {
+					$("#output").append(event.data+"<br/>");
+				}
+			};
+
+
+		}
+
+	</script>
+{% endblock %}

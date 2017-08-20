@@ -1,0 +1,39 @@
+
+/*
+ * reset
+ */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+	margin: 0; 
+	padding: 0;
+}
+
+fieldset, img { border: 0; }
+a:focus { outline: none; }
+html { min-height: 100%; }
+
+/*
+ * layout
+ */
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 150%;
+}
+
+.large-size {
+	width: 75%;
+}
+.medium-size {
+	width: 50%;
+}
+.small-size {
+	width: 25%;
+}
+.ping-success {
+	color: green;
+}
+.ping-fail {
+	color: red;
+}
