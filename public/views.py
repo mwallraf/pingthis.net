@@ -39,8 +39,7 @@ def streamed_response_ping(ipaddress=None):
 
     if not ipaddress: return None
     
-    cmd = '/bin/bash -c "/sbin/fping -A -c 5 {} 2>&1"'.format(ipaddress)
-    current_app.logger.debug('spawning ping command: {}'.format(cmd))
+    cmd = (current_app.config.get('SHELL_PING')).format(ipaddress)
     child = pexpect.spawn(cmd)
 
     def generate():
@@ -63,7 +62,7 @@ def streamed_response_traceroute(ipaddress=None):
 
     if not ipaddress: return None
 
-    cmd = '/bin/bash -c "/bin/traceroute -4 -n -A {} 2>&1"'.format(ipaddress)
+    cmd = (current_app.config.get('SHELL_TRACEROUTE')).format(ipaddress)
     current_app.logger.debug('spawning traceroute command: {}'.format(cmd))
     child = pexpect.spawn(cmd)
 
@@ -87,7 +86,7 @@ def streamed_response_portcheck(ipaddress=None, port=None):
 
     if not ipaddress or not port: return None
 
-    cmd = '/bin/bash -c "/bin/nmap -p {} {} 2>&1"'.format(port, ipaddress)
+    cmd = (current_app.config.get('SHELL_NMAP')).format(port, ipaddress)
     current_app.logger.debug('spawning nmap command: {}'.format(cmd))
     child = pexpect.spawn(cmd)
 
