@@ -60,11 +60,11 @@ harakiri = 15
 
 """.format(config.PROJECT_ROOT)
 
-    output_file = os.path.join(config.PROJECT_ROOT, "uswgi.ini")
+    output_file = os.path.join(config.PROJECT_ROOT, "uwsgi.ini")
     F = open(output_file, 'w')
     F.write(conf_file)
     F.close
 
-    print("New file create: {}".format(os.path.join(config.PROJECT_ROOT, "uswgi.ini")))
+    print("New file create: {}".format(os.path.join(config.PROJECT_ROOT, "uwsgi.ini")))
 
 
