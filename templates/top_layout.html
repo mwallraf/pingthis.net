@@ -1,0 +1,44 @@
+{#
+	BASE class for the top window (without navigation)
+#}
+<!-- command bar section -->
+{% block BLOCK_TOP_COMMAND %}
+<div class="uk-section uk-section-secondary uk-section-small">
+    <div class="uk-container uk-container-medium">
+        <div class="uk-grid-match uk-child-width-1-1 uk-grid-small" uk-grid>
+
+            <!-- title only show on large screns -->
+<!--            
+            <div class="uk-visible@s">    
+                <legend class="uk-legend uk-text-center">{{ command_title }}</legend>
+            </div>
+-->            
+
+            <div>
+                <form class="uk-grid-small uk-child-width-1-1" uk-grid action="javascript:{{ command }}()">
+
+{% block BLOCK_TOP_INPUT %}
+	-> your form input elements here <-	
+{% endblock %}
+
+                    <div class="uk-flex uk-flex-center">
+                        <button class="uk-width-1-1 uk-width-auto@s uk-button uk-button-danger uk-text-center">
+{% block BLOCK_TOP_BUTTONTEXT %}
+    {{ command }}
+{% endblock %}                        
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+{% block BLOCK_TOP_YOURIP %}
+            <div class="uk-text-center">
+                <span class="uk-text-meta">your ip is {{ g.remote_address }}</span>
+            </div>
+{% endblock %}            
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,16 +1,42 @@
-    <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 200">
+    <div class="uk-navbar-container" uk-sticky="media: 960; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-light; top: 200">
 
-        <nav class="uk-navbar-container">
             <div class="uk-container uk-container-expand">
-                <div uk-navbar>
+                <nav class="uk-navbar">
 
+                    <div class="uk-navbar-left uk-visible@s">
+
+                    <!-- menu for large screens -->
                     <ul class="uk-navbar-nav">
                         <li {% if active_page|string() == "ping" %}class="uk-active"{% endif %}><a href="{{ url_for('public.ping') }}">Ping</a></li>
                         <li {% if active_page|string() == "traceroute" %}class="uk-active"{% endif %}><a href="{{ url_for('public.traceroute') }}">Traceroute</a></li>
                         <li {% if active_page|string() == "portcheck" %}class="uk-active"{% endif %}><a href="{{ url_for('public.portcheck') }}">Port check</a></li>
+                        <li {% if active_page|string() == "uuid" %}class="uk-active"{% endif %}><a href="{{ url_for('public.uuidv4') }}">UUID</a></li>
                     </ul>
 
-                </div>
+
+                    </div>
+
+                    <div class="uk-navbar-right uk-hidden@s">
+                    <!-- menu icon for mobile devices -->
+                    <a uk-navbar-toggle-icon="" href="#offcanvas" uk-toggle="" class="uk-navbar-toggle  uk-navbar-toggle-icon uk-icon"></a>
+                    </div>
+
+                </nav>
             </div>
-        </nav>
+
     </div>
+
+<!-- off-canvas menu for mobile devices -->
+<div id="offcanvas" uk-offcanvas="mode: push; overlay: true" class="uk-offcanvas" style="">
+    <div class="uk-offcanvas-bar">
+        <div class="uk-panel">
+            <ul class="uk-nav uk-nav-default tm-nav">
+                <li class="uk-nav-header">Tools</li>
+                <li><a href="{{ url_for('public.ping') }}">Ping</a></li>
+                <li><a href="{{ url_for('public.traceroute') }}">Traceroute</a></li>
+                <li><a href="{{ url_for('public.portcheck') }}">TCP Port check</a></li>
+                <li><a href="{{ url_for('public.uuidv4') }}">UUID generator</a></li>
+            </ul> 
+        </div>
+    </div>
+</div>

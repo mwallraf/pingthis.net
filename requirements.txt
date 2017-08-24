@@ -3,11 +3,13 @@ click==6.7
 Flask==0.12.2
 Flask-Cache==0.13.1
 Flask-DebugToolbar==0.10.1
+Flask-Limiter==0.9.5.1
 Flask-Mail==0.9.1
 itsdangerous==0.24
 Jinja2==2.9.6
+limits==1.2.1
 MarkupSafe==1.0
 pexpect==4.2.1
 ptyprocess==0.5.2
+six==1.10.0
 Werkzeug==0.12.2
-uwsgi

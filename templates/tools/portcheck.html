@@ -17,7 +17,7 @@
 		<!-- command bar -->
 		{% set command = "portcheck" %}
 		{% set command_title = "TCP Port check" %}			
-		{% include 'command.html' %}
+		{% include 'top_command.html' %}
 	</div>
 {% endblock %}
 
@@ -55,6 +55,8 @@
 			var url = "{{ url_for('public.index') }}"+"portcheck/"+ip+"/"+port;
 			var source = new EventSource(url);
 
+			validateEventSourceSupport(source);
+
 			source.onmessage = function(event){
 				eofstream = /.*END STREAM.*/;
 				if ((event.data).match(eofstream)) {
@@ -64,6 +66,12 @@
 				else {
 					$("#output").append(event.data+"<br/>");
 				}
+			};
+
+			source.onerror = function(event) {
+				//alert("An unknown error occurred, please try again in a few minutes");
+				console.log("An unknown EventSource error occurred, please try again in a few minutes");
+				source.close();
 			};
 
 

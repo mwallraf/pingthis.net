@@ -3,7 +3,7 @@
 from flask import Flask, render_template, url_for
 from conf.settings import ProdConfig
 
-from extensions import  cache, mail, debug_toolbar
+from extensions import  cache, mail, debug_toolbar, limiter
 from public.views import bp_public
 import logging
 import commands
@@ -49,6 +49,7 @@ def register_extensions(app):
     cache.init_app(app)
     mail.init_app(app)
     debug_toolbar.init_app(app)
+    limiter.init_app(app)
     return None
 
 def register_blueprints(app):    

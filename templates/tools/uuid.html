@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+
+<!-- page title -->
+{% block TITLE_BLOCK %}
+    2NMS - network tools - UUIDv4 GENERATOR
+{% endblock %}
+
+
+<!-- top section -->
+{% block BLOCK_TOPSECTION %}
+	<div class="uk-section-secondary uk-preserve-color">
+		<!-- navigation bar -->
+		{% set active_page = "uuid" %}
+		{% include 'navbar.html' %}
+
+		<!-- command bar -->
+		{% set command = "uuid" %}
+		{% set command_title = "Random UUID v4 generator" %}			
+		{% include 'top_uuid.html' %}
+	</div>
+{% endblock %}
+
+
+<!-- command result section -->
+{% block BLOCK_COMMAND_RESULT_SECTION %}
+{% endblock %}
+
+
+<!-- ping command javascript -->
+{% block BLOCK_COMMAND_JAVASCRIPT %}
+	<script>
+		function uuid() {
+			location.reload();
+		};
+	</script>
+{% endblock %}

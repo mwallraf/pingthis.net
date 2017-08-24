@@ -16,8 +16,9 @@
 
 		<!-- command bar -->
 		{% set command = "ping" %}
-		{% set command_title = "Ping (IPv4)" %}			
-		{% include 'command.html' %}
+		{% set command_title = "Ping" %}			
+		{% include 'top_command.html' %}
+
 	</div>
 {% endblock %}
 
@@ -27,6 +28,8 @@
 	<script>
 
 		function ping() {
+			set_cookie();
+			inprogress();
 	        var ip = $("#ipaddress").val();
 
 	        if (!validate_ipv4(ip)) {
@@ -45,11 +48,14 @@
 			var url = "{{ url_for('public.index') }}"+"ping/"+ip;
 			var source = new EventSource(url);
 
+			validateEventSourceSupport(source);
+
 			source.onmessage = function(event){
 				eofstream = /.*END STREAM.*/;
 				if ((event.data).match(eofstream)) {
 					console.log(event.data);
 					source.close();
+					inprogress();
 				}
 				else {
 					reFail = / [^0]% loss/;
@@ -61,6 +67,11 @@
 				}
 			};
 
+			source.onerror = function(event) {
+				//alert("An unknown error occurred, please try again in a few minutes");
+				console.log("An unknown EventSource error occurred, please try again in a few minutes");
+				source.close();
+			};
 
 		}
 

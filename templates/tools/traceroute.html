@@ -16,8 +16,8 @@
 
 		<!-- command bar -->
 		{% set command = "traceroute" %}
-		{% set command_title = "Traceroute (IPv4)" %}			
-		{% include 'command.html' %}
+		{% set command_title = "Traceroute" %}			
+		{% include 'top_command.html' %}
 	</div>
 {% endblock %}
 
@@ -45,6 +45,8 @@
 			var url = "{{ url_for('public.index') }}"+"traceroute/"+ip;
 			var source = new EventSource(url);
 
+			validateEventSourceSupport(source);
+
 			source.onmessage = function(event){
 				eofstream = /.*END STREAM.*/;
 				if ((event.data).match(eofstream)) {
@@ -54,6 +56,12 @@
 				else {
 					$("#output").append(event.data+"<br/>");
 				}
+			};
+
+			source.onerror = function(event) {
+				//alert("An unknown error occurred, please try again in a few minutes");
+				console.log("An unknown EventSource error occurred, please try again in a few minutes");
+				source.close();
 			};
 
 

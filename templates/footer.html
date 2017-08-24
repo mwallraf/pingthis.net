@@ -4,6 +4,8 @@
     <div class="uk-container">
 
         <div class="uk-grid-large uk-grid-margin-large uk-grid" uk-grid="">
+
+            <!-- COMPANY SUMMARY -->
             <div class="uk-width-expand@m uk-width-1-2@s uk-first-column">
                 <div class="uk-margin uk-scrollspy-inview uk-animation-fade" uk-scrollspy-class="" style="">
                     <a href="http://www.2nms.com" class="el-link uk-link-muted">
@@ -18,6 +20,7 @@
                 </div>
             </div>
 
+            <!-- TOOLS -->
             <div class="uk-width-expand@m uk-width-1-2@s">
                 <h3 class="uk-h5 uk-scrollspy-inview uk-animation-fade" uk-scrollspy-class="" style="">
                 Tools</h3>
@@ -40,9 +43,17 @@
                             <a href="{{ url_for('public.portcheck') }}" class="el-link uk-link-muted">Port check</a>    
                         </div>
                     </li>
+
+                    <li class="el-item">   
+                        <div class="el-content">
+                            <a href="{{ url_for('public.uuidv4') }}" class="el-link uk-link-muted">UUID</a>    
+                        </div>
+                    </li>
+
                 </ul>
             </div>
 
+            <!-- COMPANY -->
             <div class="uk-width-expand@m uk-width-1-2@s">
                 <h3 class="uk-h5 uk-scrollspy-inview uk-animation-fade" uk-scrollspy-class="" style="">
                 Company    </h3>
@@ -56,6 +67,7 @@
                 </ul>
             </div>
 
+            <!-- CONTACT -->
             <div class="uk-width-expand@m uk-width-1-2@s">
                 <h3 class="uk-h5 uk-scrollspy-inview uk-animation-fade" uk-scrollspy-class="" style="">
                 Contact Us    </h3>
