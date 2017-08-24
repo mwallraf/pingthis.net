@@ -18,6 +18,13 @@ def before_request():
 
 
 
+
+@bp_public.route('/test')
+@limiter.exempt
+def test():
+    return render_template('test.html')
+
+
 @bp_public.route('/')
 @limiter.exempt
 def index():
@@ -45,6 +52,10 @@ def uuidv4():
     return render_template('tools/uuid.html',
                            uuid=uuid4
         )
+
+@bp_public.route('/speedtest')
+def speedtest():
+    return render_template('tools/speedtest.html')
 
 
 

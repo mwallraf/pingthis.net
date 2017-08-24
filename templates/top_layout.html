@@ -8,12 +8,15 @@
         <div class="uk-grid-match uk-child-width-1-1 uk-grid-small" uk-grid>
 
             <!-- title only show on large screns -->
+{% block BLOCK_TOP_TITLE %}
 <!--            
             <div class="uk-visible@s">    
                 <legend class="uk-legend uk-text-center">{{ command_title }}</legend>
             </div>
 -->            
+{% endblock %}
 
+{% block BLOCK_TOP_FORM %}
             <div>
                 <form class="uk-grid-small uk-child-width-1-1" uk-grid action="javascript:{{ command }}()">
 
@@ -31,10 +34,11 @@
 
                 </form>
             </div>
+{% endblock %}            
 
 {% block BLOCK_TOP_YOURIP %}
             <div class="uk-text-center">
-                <span class="uk-text-meta">your ip is {{ g.remote_address }}</span>
+                <span class="uk-text-meta">your ip is <em class="yourip" id="id-yourip">{{ g.remote_address }}</em></span>
             </div>
 {% endblock %}            
 

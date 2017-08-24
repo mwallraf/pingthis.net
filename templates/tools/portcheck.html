@@ -27,6 +27,7 @@
 	<script>
 
 		function portcheck() {
+			set_cookie();
 	        var ip = $("#ipaddress").val();
 	        var port = $("#port").val();
 
@@ -46,6 +47,7 @@
 	        	return (false)
 	        }
 
+			inprogress();
 	        $("#output").empty();
 		  	$("#ipaddress").removeClass('uk-form-danger').addClass('uk-form-success');
 		  	$("#port").removeClass('uk-form-danger').addClass('uk-form-success');
@@ -62,6 +64,7 @@
 				if ((event.data).match(eofstream)) {
 					console.log(event.data);
 					source.close();
+					inprogress();
 				}
 				else {
 					$("#output").append(event.data+"<br/>");

@@ -27,6 +27,7 @@
 	<script>
 
 		function traceroute() {
+			set_cookie();
 	        var ip = $("#ipaddress").val();
 
 	        if (!validate_ipv4(ip)) {
@@ -37,6 +38,7 @@
 	        	return (false)
 	        }
 
+			inprogress();
 	        $("#output").empty();
 		  	$("#ipaddress").removeClass('uk-form-danger').addClass('uk-form-success');
 	        $("#output-title").text("Traceroute result for: "+ip);
@@ -52,6 +54,7 @@
 				if ((event.data).match(eofstream)) {
 					console.log(event.data);
 					source.close();
+					inprogress();
 				}
 				else {
 					$("#output").append(event.data+"<br/>");

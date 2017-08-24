@@ -11,6 +11,7 @@
                         <li {% if active_page|string() == "traceroute" %}class="uk-active"{% endif %}><a href="{{ url_for('public.traceroute') }}">Traceroute</a></li>
                         <li {% if active_page|string() == "portcheck" %}class="uk-active"{% endif %}><a href="{{ url_for('public.portcheck') }}">Port check</a></li>
                         <li {% if active_page|string() == "uuid" %}class="uk-active"{% endif %}><a href="{{ url_for('public.uuidv4') }}">UUID</a></li>
+                        <li {% if active_page|string() == "speedtest" %}class="uk-active"{% endif %}><a href="{{ url_for('public.speedtest') }}">Speedtest</a></li>
                     </ul>
 
 
@@ -36,6 +37,7 @@
                 <li><a href="{{ url_for('public.traceroute') }}">Traceroute</a></li>
                 <li><a href="{{ url_for('public.portcheck') }}">TCP Port check</a></li>
                 <li><a href="{{ url_for('public.uuidv4') }}">UUID generator</a></li>
+                <li><a href="{{ url_for('public.speedtest') }}">Speedtest</a></li>
             </ul> 
         </div>
     </div>

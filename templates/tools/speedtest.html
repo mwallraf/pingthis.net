@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+
+<!-- page title -->
+{% block TITLE_BLOCK %}
+    2NMS - network tools - SPEEDTEST
+{% endblock %}
+
+
+<!-- top section -->
+{% block BLOCK_TOPSECTION %}
+	<div class="uk-section-secondary uk-preserve-color">
+		<!-- navigation bar -->
+		{% set active_page = "speedtest" %}
+		{% include 'navbar.html' %}
+
+		<!-- command bar -->
+		{% set command = "speedtest" %}
+		{% set command_title = "Speedtest" %}			
+		{% include 'top_speedtest.html' %}
+	</div>
+{% endblock %}
+
+
+<!-- command result section -->
+{% block BLOCK_COMMAND_RESULT_SECTION %}
+<div class="uk-section">
+	<iframe width="100%" height="600px" frameborder="0" src="http://pingthis.speedtestcustom.com"></iframe>
+</div>
+{% endblock %}
+
+
+<!-- command javascript -->
+{% block BLOCK_COMMAND_JAVASCRIPT %}
+{% endblock %}

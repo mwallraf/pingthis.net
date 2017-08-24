@@ -29,7 +29,6 @@
 
 		function ping() {
 			set_cookie();
-			inprogress();
 	        var ip = $("#ipaddress").val();
 
 	        if (!validate_ipv4(ip)) {
@@ -40,6 +39,7 @@
 	        	return (false)
 	        }
 
+			inprogress();
 	        $("#output").empty();
 		  	$("#ipaddress").removeClass('uk-form-danger').addClass('uk-form-success');
 	        $("#output-title").text("Ping result for: "+ip);

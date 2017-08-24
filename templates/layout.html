@@ -3,7 +3,7 @@
 
 	    <meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <meta name="description" content="Free online network tools provided by 2NMS">
+	    <meta name="description" content="Free online network tools like ping, traceroute, speedtest, .. provided by 2NMS">
 	    <meta name="keywords" content="ping, traceroute, tcp port check, nmap, uuid, network tools">
 
 	    <title>
@@ -21,7 +21,6 @@
 
 		<!-- site CSS -->
 	    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 
 	</head>
 
@@ -75,6 +74,14 @@
 		<script src="{{ url_for('static', filename='js/inprogress.js') }}"></script>
 		<!-- only required to support EventSource with IE + Edge -->
 		<script src="{{ url_for('static', filename='js/eventsource_ie.js') }}"></script>
+
+		<script>
+		$( document ).ready(function() {
+			$(".yourip").click(function() {
+				$("#ipaddress").val($("#id-yourip").html()).focus();
+			});
+		});
+		</script>
 
 		{% block BLOCK_COMMAND_JAVASCRIPT %}
 		{% endblock %}

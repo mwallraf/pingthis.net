@@ -77,3 +77,4 @@ def register_commands(app):
     """Register Click commands."""
     app.cli.add_command(commands.clean)
     app.cli.add_command(commands.uwsgi)
+    app.cli.add_command(commands.nginx)
