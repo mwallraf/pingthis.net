@@ -77,8 +77,13 @@
 
 		<script>
 		$( document ).ready(function() {
+			// focus on input when clicking on "your ip" label
 			$(".yourip").click(function() {
 				$("#ipaddress").val($("#id-yourip").html()).focus();
+			});
+            // focus on the output when clicking on the action button
+			$("#btn-start-command").click(function() {
+				$("#output").focus();
 			});
 		});
 		</script>
