@@ -9,7 +9,7 @@
 
 <!-- top section -->
 {% block BLOCK_TOPSECTION %}
-	<div class="uk-section-secondary uk-preserve-color">
+	<div class="uk-section-small uk-section-secondary uk-preserve-color">
 		<!-- navigation bar -->
 		{% set active_page = "speedtest" %}
 		{% include 'navbar.html' %}
@@ -25,7 +25,8 @@
 <!-- command result section -->
 {% block BLOCK_COMMAND_RESULT_SECTION %}
 <div class="uk-section">
-	<iframe width="100%" height="600px" frameborder="0" src="http://pingthis.speedtestcustom.com"></iframe>
+	<iframe id="iframe-speedtest" width="100%" height="600px" frameborder="0" src="http://pingthis.speedtestcustom.com">
+	</iframe>
 </div>
 {% endblock %}
 

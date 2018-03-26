@@ -1,4 +1,4 @@
-from flask import request, Blueprint, send_from_directory, stream_with_context, Response, current_app, redirect, url_for, g
+from flask import request, Blueprint, send_from_directory, stream_with_context, Response, current_app, redirect, url_for, g, send_file
 from flask.templating import render_template
 import pexpect
 import sys
@@ -6,6 +6,7 @@ from extensions import limiter
 from .decorators import validate_cookie, validate_stream
 from flask_limiter.util import get_remote_address
 import uuid
+import os
 
 bp_public = Blueprint('public',__name__, static_folder='../static', template_folder='../templates')
 
@@ -22,7 +23,14 @@ def before_request():
 @bp_public.route('/test')
 @limiter.exempt
 def test():
-    return render_template('test.html')
+    return render_template('test/test.html')
+
+@bp_public.route('/test2')
+@limiter.exempt
+def test2():
+    return render_template('test/test2.html')
+
+
 
 
 @bp_public.route('/')
@@ -53,11 +61,57 @@ def uuidv4():
                            uuid=uuid4
         )
 
+# TODO: set limiter
 @bp_public.route('/speedtest')
 def speedtest():
     return render_template('tools/speedtest.html')
 
 
+"""
+returns the remote ip - used by custom speedtest
+"""
+@bp_public.route('/speedtest2/remoteip')
+def remoteip():
+    return g.remote_address
+
+
+"""
+returns the remote ip - used by custom speedtest
+"""
+# TODO: set limiter
+@bp_public.route('/speedtest2/empty', methods = [ "GET", "POST" ])
+@limiter.exempt
+def empty():
+    print(request.values)
+    return Response(headers={
+                    "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+                    "Pragma": "no-cache",
+                    "Connection": "keep-alive"
+        })
+
+"""
+returns a randomly generated big file
+"""
+# TODO: set limiter
+@bp_public.route('/speedtest2/bigfile')
+@limiter.exempt
+def bigfile():
+    ckSize = int(request.values.get("ckSize", 20))
+    def _generate_data():
+        i = 0
+        while i < ckSize:
+            yield os.urandom(1048576)
+            i += 1
+
+    return Response(_generate_data(),
+                       mimetype="application/octet-stream",
+                       headers={"Content-Disposition": "attachment; filename=random.dat",
+                                "Content-Description": "File Transfer",
+                                "Content-Type": "application/octet-stream",
+                                "Content-Transfer-Encoding": "binary",
+                                "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+                                "Pragma": "no-cache"
+                                    })
 
 
 @bp_public.route('/robots.txt')
