@@ -6,7 +6,7 @@ FOREGROUND=false
 FLASK_APP=run.py
 export FLASK_APP
 
-venv=/opt/venv-pingthis/bin/activate
+venv=../venv/bin/activate
 
 display_usage() { 
 	echo "Start flask instance."

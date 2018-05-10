@@ -23,6 +23,15 @@ ENV STATIC_PATH /app/static
 # ENV STATIC_INDEX 1
 ENV STATIC_INDEX 0
 
+# set default pinghtis settings
+ENV PINGTHIS_ENV prod
+ENV PINGTHIS_SHELL_PING '/bin/bash -c "/usr/bin/fping -A -c 5 {} 2>&1"'
+ENV PINGTHIS_SHELL_TRACEROUTE '/bin/bash -c "/usr/sbin/traceroute -4 -n -A {} 2>&1"'
+ENV PINGTHIS_SHELL_NMAP '/bin/bash -c "/usr/bin/nmap -p {} {} 2>&1"'
+
+RUN apt-get -y update && \
+    apt-get -y install fping traceroute nmap
+
 # Add the flask app
 COPY ./app /app
 COPY uwsgi.ini /app
